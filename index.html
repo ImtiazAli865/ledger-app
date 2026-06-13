@@ -10,8 +10,8 @@
 <title>Ledger Manager</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--bg:#fff;--bg2:#f5f6f8;--bg3:#eef0f3;--text:#1a1a1a;--text2:#555;--text3:#888;--border:#d8dce2;--blue:#185FA5;--blue2:#0C447C;--blue-bg:#e6f1fb;--green:#3B6D11;--green-bg:#EAF3DE;--red:#A32D2D;--red-bg:#FCEBEB;--orange:#993C1D;--orange-bg:#FAECE7;--teal:#0F6E56;--teal-bg:#E1F5EE;--radius:12px;--radius-sm:8px;--shadow:0 2px 12px rgba(0,0,0,0.08)}
-@media(prefers-color-scheme:dark){:root{--bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;--text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;--border:#3a3a3c;--blue:#4a9ede;--blue2:#6db3f2;--blue-bg:#1a2d3d;--green:#7bc44e;--green-bg:#1a2d10;--red:#f47c7c;--red-bg:#2d1a1a;--orange:#f0a080;--orange-bg:#2d1a10;--teal:#4ecba8;--teal-bg:#0d2520}}
+:root{--bg:#fff;--bg2:#f5f6f8;--bg3:#eef0f3;--text:#1a1a1a;--text2:#555;--text3:#888;--border:#d8dce2;--blue:#185FA5;--blue2:#0C447C;--blue-bg:#e6f1fb;--green:#3B6D11;--green-bg:#EAF3DE;--red:#A32D2D;--red-bg:#FCEBEB;--orange:#993C1D;--orange-bg:#FAECE7;--teal:#0F6E56;--teal-bg:#E1F5EE;--purple:#6B21A8;--purple-bg:#F3E8FF;--radius:12px;--radius-sm:8px;--shadow:0 2px 12px rgba(0,0,0,0.08)}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;--text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;--border:#3a3a3c;--blue:#4a9ede;--blue-bg:#1a2d3d;--green:#7bc44e;--green-bg:#1a2d10;--red:#f47c7c;--red-bg:#2d1a1a;--orange:#f0a080;--orange-bg:#2d1a10;--teal:#4ecba8;--teal-bg:#0d2520;--purple:#c084fc;--purple-bg:#2d1a3d}}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh}
 #app{display:flex;flex-direction:column;min-height:100vh;max-width:960px;margin:0 auto;background:var(--bg)}
 .header{background:var(--blue);color:#fff;padding:14px 16px 0;position:sticky;top:0;z-index:100}
@@ -21,23 +21,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .nav-tabs{display:flex}
 .nav-tab{flex:1;padding:10px 4px 8px;text-align:center;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-weight:500}
 .nav-tab.active{color:#fff;border-bottom-color:#fff}
-.nav-tab .ni{display:block;font-size:22px;margin-bottom:2px}
+.nav-tab .ni{display:block;font-size:20px;margin-bottom:2px}
 .content{flex:1;padding:16px}
 .tab-pane{display:none}.tab-pane.active{display:block}
 .card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
 .card-title{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fc{display:flex;flex-direction:column;gap:4px}
-.fc.full{grid-column:1/-1}
 label{font-size:12px;font-weight:600;color:var(--text2)}
-input[type=text],input[type=date],input[type=number],select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);color:var(--text);font-size:14px;font-family:inherit;-webkit-appearance:none;outline:none;transition:border-color .2s}
-input:focus,select:focus{border-color:var(--blue);background:var(--bg)}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);color:var(--text);font-size:14px;font-family:inherit;-webkit-appearance:none;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);background:var(--bg)}
+textarea{resize:none;min-height:60px}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:14px;font-family:inherit;cursor:pointer;font-weight:500;transition:all .15s;white-space:nowrap;justify-content:center}
 .btn:active{transform:scale(0.97)}
 .btn-p{background:var(--blue);color:#fff;border-color:var(--blue)}
 .btn-d{background:var(--red-bg);color:var(--red);border-color:transparent}
 .btn-s{background:var(--green-bg);color:var(--green);border-color:transparent}
+.btn-ai{background:var(--purple-bg);color:var(--purple);border-color:var(--purple)}
 .btn-full{width:100%;margin-top:6px}
 .btn-sm{padding:6px 10px;font-size:12px}
 .badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600}
@@ -59,34 +59,56 @@ tr:hover td{background:var(--bg2)}
 .tr-tot td{background:var(--bg2);font-weight:700;border-top:2px solid var(--border)}
 td.num{text-align:right}th.num{text-align:right}
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:500px){.pgrid{grid-template-columns:1fr}.fg{grid-template-columns:1fr}}
+@media(max-width:500px){.pgrid{grid-template-columns:1fr}}
 .pc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .pn{font-weight:700;font-size:14px}.pi{font-size:12px;color:var(--text3);margin-top:2px}.pb{margin-top:6px}
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-end;justify-content:center}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:flex-end;justify-content:center}
 .modal-ov.show{display:flex}
-.modal{background:var(--bg);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:500px;padding:20px;max-height:90vh;overflow-y:auto}
+.modal{background:var(--bg);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:560px;padding:20px;max-height:90vh;overflow-y:auto}
 .modal-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
-@media(min-width:520px){.modal-ov{align-items:center}.modal{border-radius:var(--radius);max-height:80vh}}
+@media(min-width:520px){.modal-ov{align-items:center}.modal{border-radius:var(--radius);max-height:85vh}}
 .fbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .fbar select{flex:1;min-width:140px}
 .empty{text-align:center;padding:32px 16px;color:var(--text3)}
 .ei{font-size:48px;margin-bottom:8px}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:30px;font-size:13px;z-index:300;transition:transform .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.info-bar{background:var(--blue-bg);border:1px solid var(--blue);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--blue);display:flex;align-items:center;gap:8px}
+/* AI CHAT */
+.ai-chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;max-height:350px;overflow-y:auto;padding:4px}
+.ai-msg{display:flex;gap:8px;align-items:flex-start}
+.ai-msg.user{flex-direction:row-reverse}
+.ai-bubble{background:var(--bg2);border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.6;max-width:85%;border:1px solid var(--border)}
+.ai-msg.user .ai-bubble{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ai-msg.ai .ai-bubble{background:var(--purple-bg);color:var(--text);border-color:var(--purple)}
+.ai-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
+.ai-avatar.bot{background:var(--purple-bg);border:1px solid var(--purple)}
+.ai-avatar.user{background:var(--blue);color:#fff}
+.ai-input-row{display:flex;gap:8px}
+.ai-input-row input{flex:1}
+.suggestion-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{padding:6px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;color:var(--text2);transition:all .15s}
+.chip:hover{background:var(--purple-bg);color:var(--purple);border-color:var(--purple)}
+.ai-typing{display:flex;align-items:center;gap:4px;padding:8px 12px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:bounce .8s infinite}
+.dot:nth-child(2){animation-delay:.15s}.dot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.ai-entry-preview{background:var(--blue-bg);border:1px solid var(--blue);border-radius:var(--radius-sm);padding:12px;margin-top:8px}
+.ai-entry-preview .row{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
+.ai-entry-preview .row:last-child{border:none}
+.spinner-sm{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div id="app">
   <div class="header">
     <div class="header-top">
-      <div><h1>Ledger Manager <span>Business Accounts & Parties</span></h1></div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-sm btn-s" onclick="exportCSV()" style="font-size:11px;padding:5px 8px">⬇ CSV</button>
-      </div>
+      <div><h1>Ledger Manager <span>AI-Powered Business Accounts</span></h1></div>
+      <button class="btn btn-sm btn-s" onclick="exportCSV()" style="font-size:11px;padding:5px 8px">⬇ CSV</button>
     </div>
     <div class="nav-tabs">
       <div class="nav-tab active" onclick="switchTab('ledger')" id="tb-ledger"><span class="ni">📒</span>Ledger</div>
+      <div class="nav-tab" onclick="switchTab('ai')" id="tb-ai"><span class="ni">🤖</span>AI Assistant</div>
       <div class="nav-tab" onclick="switchTab('parties')" id="tb-parties"><span class="ni">👥</span>Parties</div>
       <div class="nav-tab" onclick="switchTab('summary')" id="tb-summary"><span class="ni">📊</span>Summary</div>
     </div>
@@ -95,12 +117,31 @@ td.num{text-align:right}th.num{text-align:right}
   <div class="content">
     <!-- LEDGER TAB -->
     <div class="tab-pane active" id="pane-ledger">
+      <div id="top-summary" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
+        <div onclick="showDetail('debit')" style="background:var(--orange-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer">
+          <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Total Debit</div>
+          <div id="top-debit" style="font-size:18px;font-weight:700;color:var(--orange)">0.00</div>
+          <div style="font-size:10px;color:var(--orange);margin-top:3px;opacity:.7">tap for detail</div>
+        </div>
+        <div onclick="showDetail('credit')" style="background:var(--green-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer">
+          <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Total Credit</div>
+          <div id="top-credit" style="font-size:18px;font-weight:700;color:var(--green)">0.00</div>
+          <div style="font-size:10px;color:var(--green);margin-top:3px;opacity:.7">tap for detail</div>
+        </div>
+        <div id="top-bal-box" onclick="showDetail('balance')" style="background:var(--teal-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer">
+          <div id="top-bal-label" style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Balance</div>
+          <div id="top-balance" style="font-size:18px;font-weight:700;color:var(--teal)">0.00</div>
+          <div style="font-size:10px;color:var(--teal);margin-top:3px;opacity:.7">tap for detail</div>
+        </div>
+      </div>
+
+      <button class="btn btn-p btn-full" onclick="toggleForm()" id="show-form-btn" style="margin-bottom:12px">+ Add New Entry</button>
+
       <div class="card" id="add-entry-card" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
           <span style="font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px">New Entry</span>
           <button class="btn btn-sm" onclick="toggleForm()" style="border:none;background:none;color:var(--text2);padding:4px;font-size:16px">✕</button>
         </div>
-
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div class="fc"><label>Date *</label><input type="date" id="e-date"></div>
@@ -116,33 +157,58 @@ td.num{text-align:right}th.num{text-align:right}
             <div class="fc"><label>💳 Credit (Cr)</label><input type="number" id="e-credit" placeholder="0.00" min="0" step="0.01"></div>
           </div>
         </div>
-
         <button class="btn btn-p btn-full" onclick="addEntry()" style="margin-top:14px">✅ Add Entry</button>
       </div>
-      <!-- TOP SUMMARY BOXES -->
-      <div id="top-summary" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-        <div onclick="showDetail('debit')" style="background:var(--orange-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:opacity .15s" onmousedown="this.style.opacity='.7'" onmouseup="this.style.opacity='1'">
-          <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Total Debit</div>
-          <div id="top-debit" style="font-size:18px;font-weight:700;color:var(--orange)">0.00</div>
-          <div style="font-size:10px;color:var(--orange);margin-top:3px;opacity:.7">tap for detail</div>
-        </div>
-        <div onclick="showDetail('credit')" style="background:var(--green-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:opacity .15s" onmousedown="this.style.opacity='.7'" onmouseup="this.style.opacity='1'">
-          <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Total Credit</div>
-          <div id="top-credit" style="font-size:18px;font-weight:700;color:var(--green)">0.00</div>
-          <div style="font-size:10px;color:var(--green);margin-top:3px;opacity:.7">tap for detail</div>
-        </div>
-        <div id="top-bal-box" onclick="showDetail('balance')" style="background:var(--teal-bg);border-radius:var(--radius);padding:12px 10px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:opacity .15s" onmousedown="this.style.opacity='.7'" onmouseup="this.style.opacity='1'">
-          <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Balance</div>
-          <div id="top-balance" style="font-size:18px;font-weight:700;color:var(--teal)">0.00</div>
-          <div style="font-size:10px;color:var(--teal);margin-top:3px;opacity:.7">tap for detail</div>
-        </div>
-      </div>
-      <button class="btn btn-p btn-full" onclick="toggleForm()" id="show-form-btn" style="margin-bottom:12px">+ Add New Entry</button>
+
       <div class="card">
         <div class="fbar">
-          <select id="f-party" onchange="renderLedger();updateTopSummary()"><option value="">All Parties</option></select>
+          <select id="f-party" onchange="renderLedger()"><option value="">All Parties</option></select>
         </div>
         <div id="ledger-content"></div>
+      </div>
+    </div>
+
+    <!-- AI ASSISTANT TAB -->
+    <div class="tab-pane" id="pane-ai">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="font-size:20px">🤖</span>
+          <div>
+            <div style="font-size:15px;font-weight:700">AI Assistant</div>
+            <div style="font-size:12px;color:var(--text3)">Urdu/English mein baat karo — entry bhi kar sakta hai!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="suggestion-chips" id="suggestion-chips">
+          <div class="chip" onclick="askAI('Aaj ki summary batao')">📊 Aaj ki summary</div>
+          <div class="chip" onclick="askAI('Sabse zyada kiska balance hai?')">💰 Sabse zyada balance</div>
+          <div class="chip" onclick="askAI('Kul kitna receivable hai?')">📤 Total receivable</div>
+          <div class="chip" onclick="askAI('Kul kitna payable hai?')">📥 Total payable</div>
+          <div class="chip" onclick="askAI('Is mahine ki report do')">📅 Monthly report</div>
+          <div class="chip" onclick="askAI('Konsi party ne sabse zyada payment ki?')">🏆 Top party</div>
+        </div>
+
+        <div class="ai-chat" id="ai-chat">
+          <div class="ai-msg ai">
+            <div class="ai-avatar bot">🤖</div>
+            <div class="ai-bubble">
+              Assalam o Alaikum! Main aapka AI Ledger Assistant hoon. 😊<br><br>
+              Main yeh kar sakta hoon:<br>
+              • <b>Entry add karna</b> — "Ahmed ko 50000 ka maal diya"<br>
+              • <b>Financial summary</b> — "Is mahine ka report do"<br>
+              • <b>Balance check</b> — "Ali ka balance kya hai?"<br>
+              • <b>Smart suggestions</b> — transactions analyze karna<br><br>
+              Kya poochna chahte hain?
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-input-row">
+          <input type="text" id="ai-input" placeholder="Kuch bhi likho... jaise 'Ahmed ko 30000 diya'" onkeydown="if(event.key==='Enter')sendAI()">
+          <button class="btn btn-ai" onclick="sendAI()" id="ai-send-btn">Send</button>
+        </div>
       </div>
     </div>
 
@@ -150,10 +216,12 @@ td.num{text-align:right}th.num{text-align:right}
     <div class="tab-pane" id="pane-parties">
       <div class="card">
         <div class="card-title">Add New Party</div>
-        <div class="fg">
-          <div class="fc"><label>Party Name *</label><input type="text" id="p-name" placeholder="Ahmed Trading Co."></div>
-          <div class="fc"><label>Phone</label><input type="text" id="p-contact" placeholder="0300-1234567"></div>
-          <div class="fc full"><label>Note</label><input type="text" id="p-note" placeholder="Optional"></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="fc"><label>Party Name *</label><input type="text" id="p-name" placeholder="Ahmed Trading Co."></div>
+            <div class="fc"><label>Phone</label><input type="text" id="p-contact" placeholder="0300-1234567"></div>
+          </div>
+          <div class="fc"><label>Note</label><input type="text" id="p-note" placeholder="Optional"></div>
         </div>
         <button class="btn btn-p btn-full" onclick="addParty()">+ Add Party</button>
       </div>
@@ -179,15 +247,21 @@ td.num{text-align:right}th.num{text-align:right}
 <!-- EDIT MODAL -->
 <div class="modal-ov" id="edit-modal">
   <div class="modal">
-    <div class="modal-title">Edit Entry <button class="btn btn-sm" onclick="closeModal()">✕</button></div>
-    <div class="fg">
-      <div class="fc"><label>Date</label><input type="date" id="m-date"></div>
-      <div class="fc"><label>Party</label><select id="m-party"></select></div>
-      <div class="fc"><label>Invoice #</label><input type="text" id="m-inv"></div>
-      <div class="fc"><label>PO Number</label><input type="text" id="m-po"></div>
-      <div class="fc full"><label>Description</label><input type="text" id="m-desc"></div>
-      <div class="fc"><label>Debit (Dr)</label><input type="number" id="m-debit" min="0" step="0.01"></div>
-      <div class="fc"><label>Credit (Cr)</label><input type="number" id="m-credit" min="0" step="0.01"></div>
+    <div class="modal-title">Edit Entry <button class="btn btn-sm" onclick="closeModal('edit-modal')">✕</button></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="fc"><label>Date</label><input type="date" id="m-date"></div>
+        <div class="fc"><label>Party</label><select id="m-party"></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="fc"><label>Invoice #</label><input type="text" id="m-inv"></div>
+        <div class="fc"><label>PO Number</label><input type="text" id="m-po"></div>
+      </div>
+      <div class="fc"><label>Description</label><input type="text" id="m-desc"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="fc"><label>Debit (Dr)</label><input type="number" id="m-debit" min="0" step="0.01"></div>
+        <div class="fc"><label>Credit (Cr)</label><input type="number" id="m-credit" min="0" step="0.01"></div>
+      </div>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px">
       <button class="btn btn-p" style="flex:1" onclick="saveEdit()">Save Changes</button>
@@ -195,150 +269,40 @@ td.num{text-align:right}th.num{text-align:right}
     </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
 
 <!-- DETAIL MODAL -->
 <div class="modal-ov" id="detail-modal">
   <div class="modal" style="max-width:600px">
-    <div class="modal-title">
-      <span id="detail-title">Details</span>
-      <button class="btn btn-sm" onclick="closeDetailModal()">✕</button>
-    </div>
+    <div class="modal-title"><span id="detail-title">Details</span><button class="btn btn-sm" onclick="closeModal('detail-modal')">✕</button></div>
     <div id="detail-content"></div>
   </div>
 </div>
 
+<!-- AI CONFIRM MODAL -->
+<div class="modal-ov" id="ai-confirm-modal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-title">🤖 AI Entry Confirm <button class="btn btn-sm" onclick="closeModal('ai-confirm-modal')">✕</button></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px">AI ne yeh entry tayar ki hai — check karke confirm karo:</p>
+    <div id="ai-confirm-content"></div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-p" style="flex:1" onclick="confirmAIEntry()">✅ Confirm & Add</button>
+      <button class="btn btn-d" onclick="closeModal('ai-confirm-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-// ===== DETAIL MODAL =====
-function showDetail(type){
-  const fp = document.getElementById('f-party').value;
-  let list = state.entries;
-  if(fp) list = list.filter(e=>e.party===fp);
+// ===== STATE =====
+let state={parties:[],entries:[]};
+let editId=null, pendingAIEntry=null;
 
-  let title='', rows='', totalAmt=0;
-
-  if(type==='debit'){
-    title = '📤 Debit Entries Detail';
-    const debits = list.filter(e=>parseFloat(e.debit)>0);
-    if(!debits.length){ showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No debit entries found.</p></div>'); return; }
-    debits.forEach(e=>{
-      const dr=parseFloat(e.debit)||0; totalAmt+=dr;
-      rows+=`<tr>
-        <td style="white-space:nowrap">${e.date}</td>
-        <td style="font-weight:600">${pname(e.party)}</td>
-        <td>${e.desc}</td>
-        <td>${e.invoice||'—'}</td>
-        <td class="num"><span class="badge bdr">${fmt(dr)}</span></td>
-      </tr>`;
-    });
-    rows+=`<tr class="tr-tot"><td colspan="4">Total Debit</td><td class="num"><span class="badge bdr">${fmt(totalAmt)}</span></td></tr>`;
-    showDetailModal(title,`<div class="tw"><table>
-      <thead><tr><th>Date</th><th>Party</th><th>Description</th><th>Invoice</th><th class="num">Debit</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`);
-
-  } else if(type==='credit'){
-    title = '📥 Credit Entries Detail';
-    const credits = list.filter(e=>parseFloat(e.credit)>0);
-    if(!credits.length){ showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No credit entries found.</p></div>'); return; }
-    credits.forEach(e=>{
-      const cr=parseFloat(e.credit)||0; totalAmt+=cr;
-      rows+=`<tr>
-        <td style="white-space:nowrap">${e.date}</td>
-        <td style="font-weight:600">${pname(e.party)}</td>
-        <td>${e.desc}</td>
-        <td>${e.invoice||'—'}</td>
-        <td class="num"><span class="badge bcr">${fmt(cr)}</span></td>
-      </tr>`;
-    });
-    rows+=`<tr class="tr-tot"><td colspan="4">Total Credit</td><td class="num"><span class="badge bcr">${fmt(totalAmt)}</span></td></tr>`;
-    showDetailModal(title,`<div class="tw"><table>
-      <thead><tr><th>Date</th><th>Party</th><th>Description</th><th>Invoice</th><th class="num">Credit</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`);
-
-  } else if(type==='balance'){
-    title = '⚖️ Balance by Party';
-    const pw = state.parties.filter(p=>list.some(e=>e.party===p.id));
-    if(!pw.length){ showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No party data.</p></div>'); return; }
-    let tDr=0,tCr=0;
-    pw.forEach(p=>{
-      const pe=list.filter(e=>e.party===p.id);
-      const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);
-      const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);
-      const bal=dr-cr; tDr+=dr; tCr+=cr;
-      rows+=`<tr>
-        <td style="font-weight:600">${p.name}</td>
-        <td class="num"><span class="badge bdr">${fmt(dr)}</span></td>
-        <td class="num"><span class="badge bcr">${fmt(cr)}</span></td>
-        <td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td>
-        <td>${bal>0?'<span style="color:var(--orange);font-weight:600;font-size:12px">Receivable</span>':bal<0?'<span style="color:var(--green);font-weight:600;font-size:12px">Payable</span>':'<span style="color:var(--text3);font-size:12px">Settled</span>'}</td>
-      </tr>`;
-    });
-    const fb=(tDr-tCr)>=0?'bpos':'bneg';
-    rows+=`<tr class="tr-tot"><td>Grand Total</td><td class="num"><span class="badge bdr">${fmt(tDr)}</span></td><td class="num"><span class="badge bcr">${fmt(tCr)}</span></td><td class="num"><span class="badge ${fb}">${(tDr-tCr)>=0?'Dr':'Cr'} ${fmt(tDr-tCr)}</span></td><td></td></tr>`;
-    showDetailModal(title,`<div class="tw"><table>
-      <thead><tr><th>Party</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th><th>Status</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`);
-  }
-}
-
-function showDetailModal(title, html){
-  document.getElementById('detail-title').textContent = title;
-  document.getElementById('detail-content').innerHTML = html;
-  document.getElementById('detail-modal').classList.add('show');
-}
-function closeDetailModal(){
-  document.getElementById('detail-modal').classList.remove('show');
-}
-document.addEventListener('DOMContentLoaded',function(){
-  const dm=document.getElementById('detail-modal');
-  if(dm) dm.addEventListener('click',function(e){if(e.target===this)closeDetailModal()});
-});
-
-// ===== TOP SUMMARY =====
-function updateTopSummary(){
-  const fp = document.getElementById('f-party').value;
-  let list = state.entries;
-  if(fp) list = list.filter(e=>e.party===fp);
-  let tDr=0, tCr=0;
-  list.forEach(e=>{ tDr+=parseFloat(e.debit)||0; tCr+=parseFloat(e.credit)||0; });
-  const bal = tDr - tCr;
-  document.getElementById('top-debit').textContent = fmt(tDr);
-  document.getElementById('top-credit').textContent = fmt(tCr);
-  document.getElementById('top-balance').textContent = (bal>=0?'Dr ':'Cr ') + fmt(bal);
-  const balBox = document.getElementById('top-bal-box');
-  if(bal >= 0){
-    balBox.style.background = 'var(--teal-bg)';
-    document.getElementById('top-balance').style.color = 'var(--teal)';
-    balBox.querySelector('div').style.color = 'var(--teal)';
-  } else {
-    balBox.style.background = 'var(--red-bg)';
-    document.getElementById('top-balance').style.color = 'var(--red)';
-    balBox.querySelector('div').style.color = 'var(--red)';
-  }
-}
-
-// ===== TOGGLE FORM =====
-function toggleForm(){
-  const card = document.getElementById('add-entry-card');
-  const btn = document.getElementById('show-form-btn');
-  const isHidden = card.style.display === 'none';
-  card.style.display = isHidden ? 'block' : 'none';
-  btn.textContent = isHidden ? '✕ Close Form' : '+ Add New Entry';
-  btn.className = isHidden ? 'btn btn-sm btn-d btn-full' : 'btn btn-p btn-full';
-  if(isHidden) card.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-// ===== STATE (localStorage) =====
-let state = {parties:[], entries:[]};
-
-function save(){try{localStorage.setItem('ledger_data', JSON.stringify(state))}catch(e){}}
+function save(){try{localStorage.setItem('ledger_data',JSON.stringify(state))}catch(e){}}
 function load(){try{const d=localStorage.getItem('ledger_data');if(d)state=JSON.parse(d)}catch(e){}}
-
 load();
-if(!state.parties) state.parties=[];
-if(!state.entries) state.entries=[];
-
-let editId = null;
+if(!state.parties)state.parties=[];
+if(!state.entries)state.entries=[];
 
 // ===== UTILS =====
 function fmt(n){return Math.abs(parseFloat(n)||0).toLocaleString('en-PK',{minimumFractionDigits:2,maximumFractionDigits:2})}
@@ -346,17 +310,29 @@ function today(){return new Date().toISOString().slice(0,10)}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 function pname(id){return(state.parties.find(x=>x.id===id)||{}).name||'—'}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
 
 // ===== INIT =====
-document.getElementById('e-date').value = today();
-refreshDDs(); renderLedger(); renderParties(); renderSummary(); updateTopSummary();
+document.getElementById('e-date').value=today();
+refreshDDs();renderLedger();renderParties();renderSummary();updateTopSummary();
 
 // ===== TABS =====
 function switchTab(t){
-  ['ledger','parties','summary'].forEach(x=>{
+  ['ledger','ai','parties','summary'].forEach(x=>{
     document.getElementById('pane-'+x).classList.toggle('active',x===t);
     document.getElementById('tb-'+x).classList.toggle('active',x===t);
   });
+}
+
+// ===== FORM TOGGLE =====
+function toggleForm(){
+  const card=document.getElementById('add-entry-card');
+  const btn=document.getElementById('show-form-btn');
+  const isHidden=card.style.display==='none';
+  card.style.display=isHidden?'block':'none';
+  btn.textContent=isHidden?'✕ Close Form':'+ Add New Entry';
+  btn.className=isHidden?'btn btn-d btn-full':'btn btn-p btn-full';
+  if(isHidden)card.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 // ===== DROPDOWNS =====
@@ -370,6 +346,54 @@ function refreshDDs(){
   });
 }
 
+// ===== TOP SUMMARY =====
+function updateTopSummary(){
+  const fp=document.getElementById('f-party').value;
+  let list=state.entries;if(fp)list=list.filter(e=>e.party===fp);
+  let tDr=0,tCr=0;
+  list.forEach(e=>{tDr+=parseFloat(e.debit)||0;tCr+=parseFloat(e.credit)||0});
+  const bal=tDr-tCr;
+  document.getElementById('top-debit').textContent=fmt(tDr);
+  document.getElementById('top-credit').textContent=fmt(tCr);
+  document.getElementById('top-balance').textContent=(bal>=0?'Dr ':'Cr ')+fmt(bal);
+  const bb=document.getElementById('top-bal-box');
+  const bl=document.getElementById('top-bal-label');
+  const bv=document.getElementById('top-balance');
+  if(bal>=0){bb.style.background='var(--teal-bg)';bl.style.color='var(--teal)';bv.style.color='var(--teal)'}
+  else{bb.style.background='var(--red-bg)';bl.style.color='var(--red)';bv.style.color='var(--red)'}
+}
+
+// ===== DETAIL MODAL =====
+function showDetail(type){
+  const fp=document.getElementById('f-party').value;
+  let list=state.entries;if(fp)list=list.filter(e=>e.party===fp);
+  let title='',rows='',totalAmt=0;
+  if(type==='debit'){
+    title='📤 Debit Entries';
+    const debits=list.filter(e=>parseFloat(e.debit)>0);
+    if(!debits.length){showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No debit entries.</p></div>');return}
+    debits.forEach(e=>{const dr=parseFloat(e.debit)||0;totalAmt+=dr;rows+=`<tr><td style="white-space:nowrap">${e.date}</td><td style="font-weight:600">${pname(e.party)}</td><td>${e.desc}</td><td class="num"><span class="badge bdr">${fmt(dr)}</span></td></tr>`});
+    rows+=`<tr class="tr-tot"><td colspan="3">Total</td><td class="num"><span class="badge bdr">${fmt(totalAmt)}</span></td></tr>`;
+    showDetailModal(title,`<div class="tw"><table><thead><tr><th>Date</th><th>Party</th><th>Description</th><th class="num">Debit</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+  } else if(type==='credit'){
+    title='📥 Credit Entries';
+    const credits=list.filter(e=>parseFloat(e.credit)>0);
+    if(!credits.length){showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No credit entries.</p></div>');return}
+    credits.forEach(e=>{const cr=parseFloat(e.credit)||0;totalAmt+=cr;rows+=`<tr><td style="white-space:nowrap">${e.date}</td><td style="font-weight:600">${pname(e.party)}</td><td>${e.desc}</td><td class="num"><span class="badge bcr">${fmt(cr)}</span></td></tr>`});
+    rows+=`<tr class="tr-tot"><td colspan="3">Total</td><td class="num"><span class="badge bcr">${fmt(totalAmt)}</span></td></tr>`;
+    showDetailModal(title,`<div class="tw"><table><thead><tr><th>Date</th><th>Party</th><th>Description</th><th class="num">Credit</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+  } else {
+    title='⚖️ Balance by Party';
+    const pw=state.parties.filter(p=>list.some(e=>e.party===p.id));
+    if(!pw.length){showDetailModal(title,'<div class="empty"><div class="ei">📭</div><p>No data.</p></div>');return}
+    let tDr=0,tCr=0;
+    pw.forEach(p=>{const pe=list.filter(e=>e.party===p.id);const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);const bal=dr-cr;tDr+=dr;tCr+=cr;rows+=`<tr><td style="font-weight:600">${p.name}</td><td class="num"><span class="badge bdr">${fmt(dr)}</span></td><td class="num"><span class="badge bcr">${fmt(cr)}</span></td><td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td></tr>`});
+    rows+=`<tr class="tr-tot"><td>Total</td><td class="num"><span class="badge bdr">${fmt(tDr)}</span></td><td class="num"><span class="badge bcr">${fmt(tCr)}</span></td><td class="num"><span class="badge ${(tDr-tCr)>=0?'bpos':'bneg'}">${(tDr-tCr)>=0?'Dr':'Cr'} ${fmt(tDr-tCr)}</span></td></tr>`;
+    showDetailModal(title,`<div class="tw"><table><thead><tr><th>Party</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+  }
+}
+function showDetailModal(title,html){document.getElementById('detail-title').textContent=title;document.getElementById('detail-content').innerHTML=html;document.getElementById('detail-modal').classList.add('show')}
+
 // ===== PARTIES =====
 function addParty(){
   const name=document.getElementById('p-name').value.trim();
@@ -378,49 +402,34 @@ function addParty(){
   if(!name){toast('⚠️ Party name required');return}
   if(state.parties.find(p=>p.name.toLowerCase()===name.toLowerCase())){toast('⚠️ Party already exists');return}
   state.parties.push({id:uid(),name,contact,note});
-  save();
-  document.getElementById('p-name').value='';
-  document.getElementById('p-contact').value='';
-  document.getElementById('p-note').value='';
+  save();document.getElementById('p-name').value='';document.getElementById('p-contact').value='';document.getElementById('p-note').value='';
   refreshDDs();renderParties();toast('✅ Party added!');
 }
-
 function delParty(id){
-  const p=state.parties.find(x=>x.id===id);
-  const cnt=state.entries.filter(e=>e.party===id).length;
+  const p=state.parties.find(x=>x.id===id);const cnt=state.entries.filter(e=>e.party===id).length;
   if(!confirm(`Delete "${p.name}"? ${cnt} entries bhi delete hongi.`))return;
-  state.parties=state.parties.filter(x=>x.id!==id);
-  state.entries=state.entries.filter(e=>e.party!==id);
-  save();refreshDDs();renderParties();renderLedger();renderSummary();
-  toast('🗑️ Party deleted');
+  state.parties=state.parties.filter(x=>x.id!==id);state.entries=state.entries.filter(e=>e.party!==id);
+  save();refreshDDs();renderParties();renderLedger();renderSummary();updateTopSummary();toast('🗑️ Party deleted');
 }
-
 function renderParties(){
   const w=document.getElementById('parties-content');
   if(!state.parties.length){w.innerHTML='<div class="empty"><div class="ei">👥</div><p>No parties yet.</p></div>';return}
   w.innerHTML='<div class="pgrid">'+state.parties.map(p=>{
     const pe=state.entries.filter(e=>e.party===p.id);
-    const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);
-    const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);
-    const bal=dr-cr;
-    return `<div class="pc"><div>
-      <div class="pn">${p.name}</div>
-      <div class="pi">${p.contact||''}${p.note?' · '+p.note:''}</div>
-      <div class="pi">${pe.length} entries</div>
-      <div class="pb"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></div>
-    </div><button class="btn btn-d btn-sm" onclick="delParty('${p.id}')">🗑</button></div>`;
+    const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);const bal=dr-cr;
+    return `<div class="pc"><div><div class="pn">${p.name}</div><div class="pi">${p.contact||''}${p.note?' · '+p.note:''}</div><div class="pi">${pe.length} entries</div><div class="pb"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></div></div><button class="btn btn-d btn-sm" onclick="delParty('${p.id}')">🗑</button></div>`;
   }).join('')+'</div>';
 }
 
 // ===== ENTRIES =====
-function addEntry(){
-  const date=document.getElementById('e-date').value;
-  const party=document.getElementById('e-party').value;
-  const inv=document.getElementById('e-inv').value.trim();
-  const po=document.getElementById('e-po').value.trim();
-  const desc=document.getElementById('e-desc').value.trim();
-  const debit=parseFloat(document.getElementById('e-debit').value)||0;
-  const credit=parseFloat(document.getElementById('e-credit').value)||0;
+function addEntry(data){
+  const date=data?data.date:document.getElementById('e-date').value;
+  const party=data?data.party:document.getElementById('e-party').value;
+  const inv=data?data.invoice:(document.getElementById('e-inv').value.trim());
+  const po=data?data.po:(document.getElementById('e-po').value.trim());
+  const desc=data?data.desc:(document.getElementById('e-desc').value.trim());
+  const debit=data?data.debit:(parseFloat(document.getElementById('e-debit').value)||0);
+  const credit=data?data.credit:(parseFloat(document.getElementById('e-credit').value)||0);
   if(!date){toast('⚠️ Date required');return}
   if(!party){toast('⚠️ Select a party');return}
   if(!desc){toast('⚠️ Description required');return}
@@ -428,37 +437,22 @@ function addEntry(){
   state.entries.push({id:uid(),date,party,invoice:inv,po,desc,debit,credit});
   state.entries.sort((a,b)=>a.date.localeCompare(b.date));
   save();
-  ['e-inv','e-po','e-desc','e-debit','e-credit'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('e-date').value=today();
-  renderLedger();renderSummary();renderParties();
+  if(!data){['e-inv','e-po','e-desc','e-debit','e-credit'].forEach(id=>document.getElementById(id).value='');document.getElementById('e-date').value=today();}
+  renderLedger();renderSummary();renderParties();updateTopSummary();
   toast('✅ Entry added!');
-  updateTopSummary();
 }
 
 function renderLedger(){
   const fp=document.getElementById('f-party').value;
   let list=state.entries;if(fp)list=list.filter(e=>e.party===fp);
   const w=document.getElementById('ledger-content');
-  if(!list.length){w.innerHTML='<div class="empty"><div class="ei">📒</div><p>'+(fp?'No entries for this party.':'No entries yet.')+'</p></div>';return}
+  if(!list.length){w.innerHTML='<div class="empty"><div class="ei">📒</div><p>'+(fp?'No entries for this party.':'No entries yet.')+'</p></div>';updateTopSummary();return}
   let bal=0,tDr=0,tCr=0;
   const rows=list.map(e=>{
-    const dr=parseFloat(e.debit)||0,cr=parseFloat(e.credit)||0;
-    bal+=dr-cr;tDr+=dr;tCr+=cr;
-    return `<tr><td style="white-space:nowrap">${e.date}</td><td>${e.invoice||'—'}</td><td>${e.po||'—'}</td>
-    <td style="font-weight:600;white-space:nowrap">${pname(e.party)}</td><td>${e.desc}</td>
-    <td class="num">${dr?'<span class="badge bdr">'+fmt(dr)+'</span>':'—'}</td>
-    <td class="num">${cr?'<span class="badge bcr">'+fmt(cr)+'</span>':'—'}</td>
-    <td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td>
-    <td><button class="btn btn-sm" onclick="openEdit('${e.id}')">✏️</button></td></tr>`;
+    const dr=parseFloat(e.debit)||0,cr=parseFloat(e.credit)||0;bal+=dr-cr;tDr+=dr;tCr+=cr;
+    return `<tr><td style="white-space:nowrap">${e.date}</td><td>${e.invoice||'—'}</td><td>${e.po||'—'}</td><td style="font-weight:600;white-space:nowrap">${pname(e.party)}</td><td>${e.desc}</td><td class="num">${dr?'<span class="badge bdr">'+fmt(dr)+'</span>':'—'}</td><td class="num">${cr?'<span class="badge bcr">'+fmt(cr)+'</span>':'—'}</td><td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td><td><button class="btn btn-sm" onclick="openEdit('${e.id}')">✏️</button></td></tr>`;
   }).join('');
-  w.innerHTML=`<div class="tw"><table>
-    <thead><tr><th>Date</th><th>Invoice</th><th>PO No.</th><th>Party</th><th>Description</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th><th></th></tr></thead>
-    <tbody>${rows}</tbody>
-    <tfoot><tr class="tr-tot"><td colspan="5">Total</td>
-    <td class="num"><span class="badge bdr">${fmt(tDr)}</span></td>
-    <td class="num"><span class="badge bcr">${fmt(tCr)}</span></td>
-    <td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td>
-    <td></td></tr></tfoot></table></div>`;
+  w.innerHTML=`<div class="tw"><table><thead><tr><th>Date</th><th>Invoice</th><th>PO</th><th>Party</th><th>Description</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Balance</th><th></th></tr></thead><tbody>${rows}</tbody><tfoot><tr class="tr-tot"><td colspan="5">Total</td><td class="num"><span class="badge bdr">${fmt(tDr)}</span></td><td class="num"><span class="badge bcr">${fmt(tCr)}</span></td><td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td><td></td></tr></tfoot></table></div>`;
   updateTopSummary();
 }
 
@@ -466,81 +460,164 @@ function renderLedger(){
 function openEdit(id){
   const e=state.entries.find(x=>x.id===id);if(!e)return;
   editId=id;refreshDDs();
-  document.getElementById('m-date').value=e.date;
-  document.getElementById('m-party').value=e.party;
-  document.getElementById('m-inv').value=e.invoice||'';
-  document.getElementById('m-po').value=e.po||'';
-  document.getElementById('m-desc').value=e.desc;
-  document.getElementById('m-debit').value=e.debit||'';
-  document.getElementById('m-credit').value=e.credit||'';
+  document.getElementById('m-date').value=e.date;document.getElementById('m-party').value=e.party;
+  document.getElementById('m-inv').value=e.invoice||'';document.getElementById('m-po').value=e.po||'';
+  document.getElementById('m-desc').value=e.desc;document.getElementById('m-debit').value=e.debit||'';document.getElementById('m-credit').value=e.credit||'';
   document.getElementById('edit-modal').classList.add('show');
 }
-function closeModal(){document.getElementById('edit-modal').classList.remove('show');editId=null}
-document.getElementById('edit-modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
-
 function saveEdit(){
   const e=state.entries.find(x=>x.id===editId);if(!e)return;
-  e.date=document.getElementById('m-date').value;
-  e.party=document.getElementById('m-party').value;
-  e.invoice=document.getElementById('m-inv').value.trim();
-  e.po=document.getElementById('m-po').value.trim();
+  e.date=document.getElementById('m-date').value;e.party=document.getElementById('m-party').value;
+  e.invoice=document.getElementById('m-inv').value.trim();e.po=document.getElementById('m-po').value.trim();
   e.desc=document.getElementById('m-desc').value.trim();
-  e.debit=parseFloat(document.getElementById('m-debit').value)||0;
-  e.credit=parseFloat(document.getElementById('m-credit').value)||0;
+  e.debit=parseFloat(document.getElementById('m-debit').value)||0;e.credit=parseFloat(document.getElementById('m-credit').value)||0;
   if(!e.date||!e.party||!e.desc){toast('⚠️ Fill required fields');return}
   state.entries.sort((a,b)=>a.date.localeCompare(b.date));
-  save();closeModal();renderLedger();renderSummary();renderParties();
-  updateTopSummary();
-  toast('✅ Updated!');
+  save();closeModal('edit-modal');renderLedger();renderSummary();renderParties();updateTopSummary();toast('✅ Updated!');
 }
-
 function delFromModal(){
   if(!confirm('Delete this entry?'))return;
   state.entries=state.entries.filter(e=>e.id!==editId);
-  save();closeModal();renderLedger();renderSummary();renderParties();
-  updateTopSummary();
-  toast('🗑️ Deleted');
+  save();closeModal('edit-modal');renderLedger();renderSummary();renderParties();updateTopSummary();toast('🗑️ Deleted');
 }
+['edit-modal','detail-modal','ai-confirm-modal'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeModal(id)});
+});
 
 // ===== SUMMARY =====
 function renderSummary(){
   const m=document.getElementById('sum-metrics'),tb=document.getElementById('sum-body'),tf=document.getElementById('sum-foot'),em=document.getElementById('sum-empty');
   if(!state.entries.length){m.innerHTML='';tb.innerHTML='';tf.innerHTML='';em.style.display='';return}
   em.style.display='none';
-  let gDr=0,gCr=0;
-  state.entries.forEach(e=>{gDr+=parseFloat(e.debit)||0;gCr+=parseFloat(e.credit)||0});
-  const gBal=gDr-gCr;
-  m.innerHTML=`
-    <div class="metric"><div class="ml">Total Debit</div><div class="mv neg">PKR ${fmt(gDr)}</div></div>
-    <div class="metric"><div class="ml">Total Credit</div><div class="mv pos">PKR ${fmt(gCr)}</div></div>
-    <div class="metric"><div class="ml">Net Balance</div><div class="mv ${gBal>=0?'neg':'pos'}">${gBal>=0?'Dr':'Cr'} ${fmt(gBal)}</div></div>
-    <div class="metric"><div class="ml">Parties</div><div class="mv blue">${state.parties.length}</div></div>
-    <div class="metric"><div class="ml">Entries</div><div class="mv blue">${state.entries.length}</div></div>`;
+  let gDr=0,gCr=0;state.entries.forEach(e=>{gDr+=parseFloat(e.debit)||0;gCr+=parseFloat(e.credit)||0});const gBal=gDr-gCr;
+  m.innerHTML=`<div class="metric"><div class="ml">Total Debit</div><div class="mv neg">PKR ${fmt(gDr)}</div></div><div class="metric"><div class="ml">Total Credit</div><div class="mv pos">PKR ${fmt(gCr)}</div></div><div class="metric"><div class="ml">Net Balance</div><div class="mv ${gBal>=0?'neg':'pos'}">${gBal>=0?'Dr':'Cr'} ${fmt(gBal)}</div></div><div class="metric"><div class="ml">Parties</div><div class="mv blue">${state.parties.length}</div></div><div class="metric"><div class="ml">Entries</div><div class="mv blue">${state.entries.length}</div></div>`;
   const pw=state.parties.filter(p=>state.entries.some(e=>e.party===p.id));
   let tDr=0,tCr=0;
-  tb.innerHTML=pw.map(p=>{
-    const pe=state.entries.filter(e=>e.party===p.id);
-    const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);
-    const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);
-    const bal=dr-cr;tDr+=dr;tCr+=cr;
-    return `<tr><td>${p.name}<br><span style="font-size:11px;color:var(--text3)">${pe.length} entries</span></td>
-      <td class="num"><span class="badge bdr">${fmt(dr)}</span></td>
-      <td class="num"><span class="badge bcr">${fmt(cr)}</span></td>
-      <td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td>
-      <td>${bal>0?'<span style="color:var(--orange);font-size:12px;font-weight:600">Receivable</span>':bal<0?'<span style="color:var(--green);font-size:12px;font-weight:600">Payable</span>':'<span style="font-size:12px;color:var(--text3)">Settled</span>'}</td></tr>`;
-  }).join('');
-  const fb=(tDr-tCr)>=0?'bpos':'bneg';
-  tf.innerHTML=`<tr class="tr-tot"><td>Grand Total</td><td class="num"><span class="badge bdr">${fmt(tDr)}</span></td><td class="num"><span class="badge bcr">${fmt(tCr)}</span></td><td class="num"><span class="badge ${fb}">${(tDr-tCr)>=0?'Dr':'Cr'} ${fmt(tDr-tCr)}</span></td><td></td></tr>`;
+  tb.innerHTML=pw.map(p=>{const pe=state.entries.filter(e=>e.party===p.id);const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);const bal=dr-cr;tDr+=dr;tCr+=cr;return `<tr><td>${p.name}<br><span style="font-size:11px;color:var(--text3)">${pe.length} entries</span></td><td class="num"><span class="badge bdr">${fmt(dr)}</span></td><td class="num"><span class="badge bcr">${fmt(cr)}</span></td><td class="num"><span class="badge ${bal>=0?'bpos':'bneg'}">${bal>=0?'Dr':'Cr'} ${fmt(bal)}</span></td><td>${bal>0?'<span style="color:var(--orange);font-size:12px;font-weight:600">Receivable</span>':bal<0?'<span style="color:var(--green);font-size:12px;font-weight:600">Payable</span>':'<span style="font-size:12px;color:var(--text3)">Settled</span>'}</td></tr>`}).join('');
+  tf.innerHTML=`<tr class="tr-tot"><td>Grand Total</td><td class="num"><span class="badge bdr">${fmt(tDr)}</span></td><td class="num"><span class="badge bcr">${fmt(tCr)}</span></td><td class="num"><span class="badge ${(tDr-tCr)>=0?'bpos':'bneg'}">${(tDr-tCr)>=0?'Dr':'Cr'} ${fmt(tDr-tCr)}</span></td><td></td></tr>`;
 }
 
 // ===== EXPORT =====
 function exportCSV(){
   const rows=[['Date','Invoice','PO Number','Party','Description','Debit','Credit','Balance']];
-  let bal=0;
-  state.entries.forEach(e=>{const dr=parseFloat(e.debit)||0,cr=parseFloat(e.credit)||0;bal+=dr-cr;rows.push([e.date,e.invoice||'',e.po||'',pname(e.party),e.desc,dr||'',cr||'',bal.toFixed(2)])});
+  let bal=0;state.entries.forEach(e=>{const dr=parseFloat(e.debit)||0,cr=parseFloat(e.credit)||0;bal+=dr-cr;rows.push([e.date,e.invoice||'',e.po||'',pname(e.party),e.desc,dr||'',cr||'',bal.toFixed(2)])});
   const csv=rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='ledger.csv';a.click();
   toast('📥 CSV downloaded!');
+}
+
+// ===== AI ASSISTANT =====
+let aiMessages=[{role:'user',content:'You are an AI assistant for a business ledger app. You help with: 1) Adding entries when user describes transactions in Urdu or English 2) Providing financial summaries 3) Answering questions about balances. When adding an entry, respond with JSON in this exact format: {"action":"add_entry","date":"YYYY-MM-DD","party_name":"name","description":"desc","debit":0,"credit":0,"invoice":"","po":""}. For other responses, reply in the same language as the user (Urdu or English), be concise and helpful. Current date: '+today()}];
+
+function buildContext(){
+  let ctx='Current ledger data:\n';
+  ctx+=`Parties: ${state.parties.map(p=>p.name).join(', ')||'None'}\n`;
+  let tDr=0,tCr=0;
+  state.entries.forEach(e=>{tDr+=parseFloat(e.debit)||0;tCr+=parseFloat(e.credit)||0});
+  ctx+=`Total Entries: ${state.entries.length}, Total Debit: ${fmt(tDr)}, Total Credit: ${fmt(tCr)}, Net Balance: ${tDr-tCr>=0?'Dr':'Cr'} ${fmt(tDr-tCr)}\n`;
+  state.parties.forEach(p=>{
+    const pe=state.entries.filter(e=>e.party===p.id);
+    if(pe.length){const dr=pe.reduce((a,e)=>a+(parseFloat(e.debit)||0),0);const cr=pe.reduce((a,e)=>a+(parseFloat(e.credit)||0),0);ctx+=`${p.name}: Dr=${fmt(dr)}, Cr=${fmt(cr)}, Balance=${dr-cr>=0?'Dr':'Cr'} ${fmt(dr-cr)}\n`}
+  });
+  return ctx;
+}
+
+function addAIMessage(role,text,isTyping=false){
+  const chat=document.getElementById('ai-chat');
+  const div=document.createElement('div');
+  div.className=`ai-msg ${role==='assistant'?'ai':'user'}`;
+  if(isTyping){
+    div.id='ai-typing';
+    div.innerHTML=`<div class="ai-avatar bot">🤖</div><div class="ai-bubble"><div class="ai-typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
+  } else {
+    div.innerHTML=role==='assistant'
+      ?`<div class="ai-avatar bot">🤖</div><div class="ai-bubble">${text}</div>`
+      :`<div class="ai-avatar user">👤</div><div class="ai-bubble">${text}</div>`;
+  }
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
+  return div;
+}
+
+async function sendAI(){
+  const input=document.getElementById('ai-input');
+  const msg=input.value.trim();
+  if(!msg)return;
+  input.value='';
+  addAIMessage('user',msg);
+  const typingEl=addAIMessage('assistant','',true);
+  const btn=document.getElementById('ai-send-btn');
+  btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span>';
+
+  const context=buildContext();
+  const messages=[
+    {role:'user',content:aiMessages[0].content+'\n\n'+context},
+    ...aiMessages.slice(1),
+    {role:'user',content:msg}
+  ];
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages})
+    });
+    const data=await res.json();
+    const reply=data.content?.[0]?.text||'Sorry, koi response nahi mili.';
+    typingEl.remove();
+    aiMessages.push({role:'user',content:msg},{role:'assistant',content:reply});
+
+    // Check if AI wants to add entry
+    try{
+      const jsonMatch=reply.match(/\{[\s\S]*"action"\s*:\s*"add_entry"[\s\S]*\}/);
+      if(jsonMatch){
+        const entryData=JSON.parse(jsonMatch[0]);
+        const party=state.parties.find(p=>p.name.toLowerCase().includes(entryData.party_name.toLowerCase()));
+        if(party){
+          entryData.party=party.id;
+          pendingAIEntry=entryData;
+          const preview=`<div class="ai-entry-preview">
+            <div class="row"><span>Date</span><span>${entryData.date}</span></div>
+            <div class="row"><span>Party</span><span style="font-weight:600">${party.name}</span></div>
+            <div class="row"><span>Description</span><span>${entryData.description}</span></div>
+            ${entryData.debit?`<div class="row"><span>Debit</span><span class="badge bdr">${fmt(entryData.debit)}</span></div>`:''}
+            ${entryData.credit?`<div class="row"><span>Credit</span><span class="badge bcr">${fmt(entryData.credit)}</span></div>`:''}
+          </div>`;
+          document.getElementById('ai-confirm-content').innerHTML=preview;
+          document.getElementById('ai-confirm-modal').classList.add('show');
+          addAIMessage('assistant','✅ Main ne entry tayar kar li hai! Confirm karo toh add ho jaayegi.');
+        } else {
+          addAIMessage('assistant',`⚠️ "${entryData.party_name}" party nahi mili. Pehle Parties tab mein add karo.`);
+        }
+        btn.disabled=false;btn.innerHTML='Send';return;
+      }
+    }catch(e){}
+
+    addAIMessage('assistant',reply.replace(/\n/g,'<br>'));
+  }catch(e){
+    typingEl.remove();
+    addAIMessage('assistant','❌ AI se connect nahi ho saka. Internet check karo.');
+  }
+  btn.disabled=false;btn.innerHTML='Send';
+}
+
+function askAI(q){document.getElementById('ai-input').value=q;sendAI();}
+
+function confirmAIEntry(){
+  if(!pendingAIEntry)return;
+  addEntry({
+    date:pendingAIEntry.date,
+    party:pendingAIEntry.party,
+    invoice:pendingAIEntry.invoice||'',
+    po:pendingAIEntry.po||'',
+    desc:pendingAIEntry.description,
+    debit:pendingAIEntry.debit||0,
+    credit:pendingAIEntry.credit||0
+  });
+  closeModal('ai-confirm-modal');
+  pendingAIEntry=null;
+  switchTab('ledger');
+  toast('🤖 AI entry add ho gayi!');
 }
 </script>
 </body>
