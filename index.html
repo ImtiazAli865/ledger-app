@@ -711,7 +711,7 @@ async function sendAI(){
   const sysMsg=`You are an AI assistant for a business ledger app. Today: ${today()}. When user wants to add an entry, respond ONLY with JSON: {"action":"add_entry","date":"YYYY-MM-DD","party_name":"name","description":"desc","debit":0,"credit":0}. Otherwise reply in same language as user (Urdu or English), concise.\n${buildCtx()}`;
   const msgs=[{role:'user',content:sysMsg},...aiHistory,{role:'user',content:msg}];
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,messages:msgs})});
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:msgs})});
     const data=await res.json();const reply=data.content?.[0]?.text||'Sorry, response nahi mili.';
     typing.remove();aiHistory.push({role:'user',content:msg},{role:'assistant',content:reply});
     try{
