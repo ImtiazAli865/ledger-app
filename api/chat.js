@@ -1,7 +1,13 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
 
   try {
     const { messages } = req.body;
@@ -9,7 +15,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': apiKey,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
@@ -19,8 +25,8 @@ export default async function handler(req, res) {
       })
     });
     const data = await response.json();
-    res.status(200).json(data);
+    return res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 }
