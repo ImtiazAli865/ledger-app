@@ -100,6 +100,21 @@ td.num{text-align:right}th.num{text-align:right}
 .spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
 .spinner-sm{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* VOICE */
+.voice-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--purple);background:var(--purple-bg);color:var(--purple);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s;flex-shrink:0}
+.voice-btn.listening{background:var(--red);border-color:var(--red);color:#fff;animation:ripple 1s infinite}
+.voice-btn.speaking{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+@keyframes ripple{0%{box-shadow:0 0 0 0 rgba(107,33,168,0.4)}70%{box-shadow:0 0 0 12px rgba(107,33,168,0)}100%{box-shadow:0 0 0 0 rgba(107,33,168,0)}}
+.voice-status{font-size:12px;color:var(--text3);text-align:center;margin-top:6px;min-height:16px}
+.voice-wave{display:none;align-items:center;gap:3px;height:20px}
+.voice-wave.active{display:flex}
+.wave-bar{width:3px;background:var(--purple);border-radius:3px;animation:wave 0.8s ease-in-out infinite}
+.wave-bar:nth-child(1){height:6px;animation-delay:0s}
+.wave-bar:nth-child(2){height:14px;animation-delay:0.1s}
+.wave-bar:nth-child(3){height:20px;animation-delay:0.2s}
+.wave-bar:nth-child(4){height:14px;animation-delay:0.3s}
+.wave-bar:nth-child(5){height:6px;animation-delay:0.4s}
+@keyframes wave{0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}
 /* AI */
 .ai-chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;max-height:350px;overflow-y:auto;padding:4px}
 .ai-msg{display:flex;gap:8px;align-items:flex-start}
@@ -234,8 +249,16 @@ td.num{text-align:right}th.num{text-align:right}
           </div>
         </div>
         <div class="ai-input-row">
-          <input type="text" id="ai-input" placeholder="Kuch bhi likho..." onkeydown="if(event.key==='Enter')sendAI()">
+          <button class="voice-btn" id="voice-btn" onclick="toggleVoice()" title="Voice input">🎤</button>
+          <input type="text" id="ai-input" placeholder="Bolo ya likho..." onkeydown="if(event.key==='Enter')sendAI()">
           <button class="btn btn-ai" onclick="sendAI()" id="ai-send-btn">Send</button>
+        </div>
+        <div class="voice-status" id="voice-status"></div>
+        <div style="display:flex;justify-content:center;margin-top:4px">
+          <div class="voice-wave" id="voice-wave">
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -322,6 +345,125 @@ td.num{text-align:right}th.num{text-align:right}
 <div class="toast" id="toast"></div>
 
 <script>
+// VOICE RECOGNITION & SYNTHESIS
+let recognition = null;
+let isListening = false;
+let isSpeaking = false;
+let currentUtterance = null;
+
+function initVoice(){
+  if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
+    document.getElementById('voice-btn').style.display='none';
+    return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = 'ur-PK';
+  recognition.continuous = false;
+  recognition.interimResults = true;
+
+  recognition.onstart = () => {
+    isListening = true;
+    document.getElementById('voice-btn').className = 'voice-btn listening';
+    document.getElementById('voice-btn').textContent = '🔴';
+    document.getElementById('voice-status').textContent = 'Sun raha hoon... bolo!';
+    document.getElementById('voice-wave').classList.add('active');
+  };
+
+  recognition.onresult = (e) => {
+    let transcript = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      transcript += e.results[i][0].transcript;
+    }
+    document.getElementById('ai-input').value = transcript;
+    if(e.results[e.results.length-1].isFinal){
+      document.getElementById('voice-status').textContent = '✅ Suna: ' + transcript;
+      setTimeout(() => sendAI(), 500);
+    }
+  };
+
+  recognition.onerror = (e) => {
+    stopListening();
+    if(e.error === 'not-allowed'){
+      document.getElementById('voice-status').textContent = '⚠️ Microphone permission do!';
+    } else {
+      document.getElementById('voice-status').textContent = '❌ Error: ' + e.error;
+    }
+  };
+
+  recognition.onend = () => { stopListening(); };
+}
+
+function stopListening(){
+  isListening = false;
+  document.getElementById('voice-btn').className = 'voice-btn';
+  document.getElementById('voice-btn').textContent = '🎤';
+  document.getElementById('voice-wave').classList.remove('active');
+  setTimeout(() => { document.getElementById('voice-status').textContent = ''; }, 2000);
+}
+
+function toggleVoice(){
+  if(isSpeaking){ stopSpeaking(); return; }
+  if(!recognition){ initVoice(); }
+  if(isListening){
+    recognition.stop();
+    stopListening();
+  } else {
+    try{
+      // Try Urdu first, fallback to English
+      recognition.lang = 'ur-PK';
+      recognition.start();
+    } catch(e){
+      document.getElementById('voice-status').textContent = '❌ Microphone error';
+    }
+  }
+}
+
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  stopSpeaking();
+  // Clean text — remove HTML tags and emojis for speech
+  const clean = text.replace(/<[^>]*>/g, '').replace(/[🎤🔴✅⚠️❌🤖👤📊💰📤📥📅🗑️]/g, '').trim();
+  if(!clean) return;
+
+  currentUtterance = new SpeechSynthesisUtterance(clean);
+  // Detect Urdu text
+  const hasUrdu = /[؀-ۿ]/.test(clean);
+  currentUtterance.lang = hasUrdu ? 'ur-PK' : 'en-US';
+  currentUtterance.rate = 0.9;
+  currentUtterance.pitch = 1;
+
+  currentUtterance.onstart = () => {
+    isSpeaking = true;
+    document.getElementById('voice-btn').className = 'voice-btn speaking';
+    document.getElementById('voice-btn').textContent = '🔊';
+    document.getElementById('voice-status').textContent = 'Bol raha hoon... (tap to stop)';
+  };
+  currentUtterance.onend = () => {
+    isSpeaking = false;
+    document.getElementById('voice-btn').className = 'voice-btn';
+    document.getElementById('voice-btn').textContent = '🎤';
+    document.getElementById('voice-status').textContent = '';
+  };
+  currentUtterance.onerror = () => {
+    isSpeaking = false;
+    document.getElementById('voice-btn').className = 'voice-btn';
+    document.getElementById('voice-btn').textContent = '🎤';
+  };
+  window.speechSynthesis.speak(currentUtterance);
+}
+
+function stopSpeaking(){
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+  isSpeaking = false;
+  document.getElementById('voice-btn').className = 'voice-btn';
+  document.getElementById('voice-btn').textContent = '🎤';
+  document.getElementById('voice-status').textContent = '';
+}
+
+// Init voice on load
+window.addEventListener('load', initVoice);
+
 // FIREBASE
 firebase.initializeApp({
   apiKey:"AIzaSyCpTT1bVr85YwN0hIYMJRY-f8kUMjcqcEo",
@@ -569,7 +711,7 @@ async function sendAI(){
   const sysMsg=`You are an AI assistant for a business ledger app. Today: ${today()}. When user wants to add an entry, respond ONLY with JSON: {"action":"add_entry","date":"YYYY-MM-DD","party_name":"name","description":"desc","debit":0,"credit":0}. Otherwise reply in same language as user (Urdu or English), concise.\n${buildCtx()}`;
   const msgs=[{role:'user',content:sysMsg},...aiHistory,{role:'user',content:msg}];
   try{
-    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:msgs})});
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:800,messages:msgs})});
     const data=await res.json();const reply=data.content?.[0]?.text||'Sorry, response nahi mili.';
     typing.remove();aiHistory.push({role:'user',content:msg},{role:'assistant',content:reply});
     try{
@@ -587,12 +729,12 @@ async function sendAI(){
             ${ed.credit?`<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px"><span>Credit</span><span class="badge bcr">${fmt(ed.credit)}</span></div>`:''}
           </div>`;
           document.getElementById('ai-confirm-modal').classList.add('show');
-          addMsg('assistant','✅ Entry tayar hai! Confirm karo toh add ho jaayegi.');
+          addMsg('assistant','✅ Entry tayar hai! Confirm karo toh add ho jaayegi.'); speakText('Entry tayar hai, confirm karo toh add ho jaayegi.');
         } else {addMsg('assistant',`⚠️ "${ed.party_name}" party nahi mili. Pehle Parties tab mein add karo.`)}
         btn.disabled=false;btn.innerHTML='Send';return;
       }
     }catch(e){}
-    addMsg('assistant',reply.replace(/\n/g,'<br>'));
+    addMsg('assistant',reply.replace(/\n/g,'<br>')); speakText(reply);
   }catch(e){typing.remove();addMsg('assistant','❌ AI se connect nahi ho saka.');}
   btn.disabled=false;btn.innerHTML='Send';
 }
